@@ -1,0 +1,44 @@
+@import "../../style.scss";
+
+.home{
+    @include themify($themes) {
+        padding: 20px 70px;
+        background-color: themed("bgSoft");
+    
+        @include mobile {
+            padding: 10px;
+        }
+    
+        @include tablet{
+            padding: 20px;
+        }
+
+        .search {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid themed("border");
+            border-radius: 5px;
+            padding: 5px;
+            border-radius: 20px;
+            background-color: themed("bg");
+            color: themed("textColor");
+            margin-bottom: 10px;
+    
+            input {
+              border: none;
+              width: 80%;
+              background-color: transparent;
+              color: themed("textColor");
+    
+                @include mobile{
+                    display: none;
+                }
+        
+                @include tablet{
+                    width: 200px;
+                }
+            }
+        }
+    }
+}

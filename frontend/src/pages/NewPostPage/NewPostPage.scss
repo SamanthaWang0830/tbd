@@ -1,0 +1,99 @@
+@import "../../style.scss";
+
+.newPost{
+    @include themify($themes) {
+        background-color: themed("bgSoft");
+        padding: 30px;
+
+        h1,h2,h3,h4,h5,h6{
+            font-weight: bold;
+        }
+        h1{
+            font-size: 36px;
+        }
+        h2{
+            font-size:32px;
+        }
+        h3{
+            font-size:28px;
+        }
+        h4{
+            font-size:24px;
+        }
+        h5{
+            font-size:20px;
+        }
+        a{
+            color:blue;
+            text-decoration: underline;
+        }
+    
+        @include mobile {
+            padding: 10px;
+        }
+    
+        @include tablet{
+            padding: 20px;
+        }
+
+        .container{
+            padding: 20px 70px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            @include mobile{
+                padding: 10px;
+                flex-direction: column;
+
+            }
+        
+            @include tablet{
+                padding: 20px;
+            }
+
+            .left{
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start ;
+                gap: 10px;
+
+                form{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 10px;
+
+                    button{
+                        width: 50%;
+                        background-color: #8D7513;
+                        border: none;
+                        color: white;
+                        font-size: 20px;
+                        padding: 10px;
+                        font-weight: bold;
+                        cursor: pointer;
+                    }
+                }
+
+                
+            }
+    
+            .right{
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                div{
+                    height: 100vh;
+                    border-radius: 2px;
+                    box-shadow: 0px 0px 25px -10px #8D7513;
+                    border: 1px solid #A0AF65;
+                }
+            }
+        }
+        
+    }
+}
