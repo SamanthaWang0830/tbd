@@ -1,29 +1,40 @@
 import React, { useState } from 'react'
-import { marked } from 'marked'
-import { Remarkable } from "remarkable"
+import {useNavigate} from 'react-router-dom'
 import './NewPostPage.scss'
-import TextareaAutosize from 'react-textarea-autosize';
-
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-const md = new Remarkable()
+import ReactMarkdown from "react-markdown";
 
 const NewPostPage = () => {
-    const [text, setText] = useState('');
+  const navigate=useNavigate()
+  const [text, setText] = useState('');
 
-    const handleTextChange = (value) => {
-        setText(value);
-    };
+  const textChangeHandler = (e) => {
+    setText(e.currentTarget.value);
+  };
 
-    const handleSave = () => {
-        console.log(JSON.stringify(text))
-        console.log(text)
-    };
+  const submitHandler = () => {
+    console.log(JSON.stringify(text))
+    console.log(text)
+    navigate('/')
+  };
 
   return (
-    <div>
-      <ReactQuill value={text} onChange={handleTextChange} />
-      <button onClick={handleSave}>Save</button>
+    <div className='newPost'>
+      <div className="title">Markdown Editor</div>
+      
+      <div className="container">
+        <div className="text">
+          <div>Markdown Text</div>
+          <textarea onChange={textChangeHandler} />
+        </div>
+
+        <div className="preview">
+          <div className='preview-title'>Converted Text</div>
+          <div className="preview-area">
+            <ReactMarkdown children={text} />
+          </div>
+        </div>
+      </div>
+      <button onClick={submitHandler}>Save</button>
     </div>
   );
 }

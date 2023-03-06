@@ -13,21 +13,28 @@ import {
 import './style.scss'
 import { useContext } from 'react';
 import { ModeContext } from './context/modeContext';
+import {
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query'
 
 function App() {
   const {darkMode}=useContext(ModeContext)
-  
+  const queryClient = new QueryClient()
+
   const Layout=()=>{
     return (
-      <div className={`theme-${darkMode ? "dark" : "light"}`}>
-        <Navbar/>
-        <div style={{display:"flex"}}>
-          <Leftbar/>
-          <div style={{ flex: 6 }}>
-            <Outlet />
+      <QueryClientProvider client={queryClient}>
+        <div className={`theme-${darkMode ? "dark" : "light"}`}>
+          <Navbar/>
+          <div style={{display:"flex"}}>
+            <Leftbar/>
+            <div style={{ flex: 6 }}>
+              <Outlet />
+            </div>
           </div>
         </div>
-      </div>
+      </QueryClientProvider>
     )
   }
   const router = createBrowserRouter([

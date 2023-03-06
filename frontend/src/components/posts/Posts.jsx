@@ -2,8 +2,19 @@ import React,{useContext}  from 'react'
 import './Posts.scss'
 import Post from '../Post/Post'
 import { SearchContext } from '../../context/searchContext';
+import {useQuery} from '@tanstack/react-query'
+import {makeRequest} from '../../axios'
 
 const Posts = () => {
+  
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['posts'],
+    queryFn: () =>
+      makeRequest.get('/posts').then(res=>{
+        return res.data
+      })
+  })
+  
   const {query}= useContext(SearchContext)
     const posts = [
         {
@@ -34,9 +45,11 @@ const Posts = () => {
       ];
       
     return <div className="posts">
-      {posts.filter((post)=>post.desc.toLowerCase().includes(query)).map(post=>(
-        <Post post={post} key={post.id}/>
-      ))}
+      {error? 'Something went wrong' : 
+        (isLoading? 'Loading' : 
+          data.filter((post)=>post.desc.toLowerCase().includes(query)).map(post=>(<Post post={post} key={post.id}/>))
+        )
+      }
     </div>;
 }
 
